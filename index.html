@@ -15,8 +15,10 @@
     <body>
         <div id="game-area">
             <div class="pixel-text" id="title">
-                <h1>Ariel's Portfolio</h1>
+                <h1>Super Ariel Bros</h1>
             </div>
+            <div id="sun"></div>
+            <div id="jump" class="pixel-text"><p>Jump Here! &#x2B06;</p></div>
             <canvas id="player"></canvas>
             <div id="tutorial">
                 <div id="post"></div>
@@ -24,13 +26,13 @@
                     Use A and D to move left and right or arrow keys <br />
                     Space or W to jump
                     <br />
-                    <span style="font-size: 20px"
-                        >If you get stuck, hold "Shift" and scroll or press "R"
-                        to restart</span
-                    >
+                    <span style="font-size: 20px">Press "R" to restart</span>
                 </p>
             </div>
-            <div class="collision world-items" style="left: 300px"></div>
+            <div
+                class="collision world-items"
+                style="left: 300px; width: 250px"
+            ></div>
             <div class="collision world-items" style="left: 800px"></div>
             <div
                 class="collision world-items"
@@ -50,7 +52,7 @@
                     Hello! Welcome to my game! <br />
                     Keep jumping on the boxes to learn more about me!
                 </div>
-                <div class="box-item world-item"></div>
+                <div class="box-item world-item">?</div>
             </div>
             <div
                 class="box-container pixel-text"
@@ -61,7 +63,7 @@
                     I am a Video Game Developer <br />
                     and a Full-Stack Web Developer.
                 </div>
-                <div class="box-item world-item"></div>
+                <div class="box-item world-item">?</div>
             </div>
             <div class="floor"></div>
         </div>

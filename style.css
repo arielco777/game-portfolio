@@ -24,6 +24,25 @@ body {
     padding: 5px 20px;
 }
 
+#sun {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100px;
+    width: 100px;
+    background-color: yellow;
+    border-radius: 0 0 0 999px;
+    z-index: 50;
+}
+
+#jump {
+    position: absolute;
+    bottom: 50px;
+    font-size: 20px;
+    left: 150px;
+    color: white;
+}
+
 .pixel-text {
     font-family: "Pixelify Sans", sans-serif;
     font-optical-sizing: auto;
@@ -108,6 +127,9 @@ body {
 
 .box-item {
     /* position: ; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 5rem;
     background-color: gray;
     width: 50px;
