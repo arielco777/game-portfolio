@@ -48,18 +48,8 @@ function draw() {
         document.querySelector("body").appendChild(p);
     }
 
-    player.width = characterWidth;
-    player.height = characterHeight;
-
     player.style.left = `${playerLeft}px`;
     player.style.bottom = `${playerBottom}px`;
-
-    const ctx = player.getContext("2d");
-    base_image = new Image();
-    base_image.src = "assets/Me.png";
-    base_image.onload = function () {
-        ctx.drawImage(base_image, 0, 0, 64, 64);
-    };
 
     // ctx.fillStyle = "rgb(200 0 200)";
     // ctx.fillRect(0, 0, characterWidth, characterHeight);

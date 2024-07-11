@@ -105,6 +105,12 @@ body {
     position: fixed;
     bottom: 100px;
     z-index: 50;
+    width: 64px;
+    height: 84px;
+    background-image: url("./assets/Me.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
 }
 
 .box-container {
