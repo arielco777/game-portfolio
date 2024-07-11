@@ -1,3 +1,7 @@
+:root {
+    --floor-level: 100px;
+}
+
 * {
     min-width: 0;
 }
@@ -22,7 +26,7 @@ body {
 
 .collision {
     z-index: 10;
-    bottom: 0;
+    bottom: 10px;
     background: red;
     width: 200px;
     height: 100px;
@@ -61,8 +65,9 @@ body {
 #game-area {
     z-index: 0;
     width: 7000px;
-    height: 100%;
+    height: calc(100% - 90px);
     position: relative;
+    /* padding: 20px; */
     left: 0;
     background: rgb(2, 0, 36);
     background: linear-gradient(
@@ -75,6 +80,7 @@ body {
 
 #player {
     position: fixed;
+    bottom: 100px;
     z-index: 50;
 }
 
@@ -106,4 +112,14 @@ body {
 
 .hidden {
     visibility: hidden;
+}
+
+.floor {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background-color: rgb(36, 114, 0);
 }

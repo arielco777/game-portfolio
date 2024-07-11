@@ -24,13 +24,13 @@ console.log("Boxes: ", boxes);
 let areaLeft = 0;
 
 let playerLeft = 0;
-let playerBottom = 0;
+let playerBottom = 100;
 let characterSpeed = 5;
 
 let verticalVelocity = 0;
 const gravity = 0.5;
 const jumpStrength = 12;
-let groundLevel = 0;
+let groundLevel = 100;
 
 let rightPressed = false;
 let leftPressed = false;
@@ -151,17 +151,15 @@ function checkCollision() {
     const playerTop = playerBottom + characterHeight;
     const playerRight = playerLeft + characterWidth;
     collisions.forEach((collider, index) => {
+        const rect = collider.getBoundingClientRect();
         const colliderHeight = parseFloat(
             window.getComputedStyle(collider).height
         );
         const colliderWidth = parseFloat(
             window.getComputedStyle(collider).width
         );
-        const colliderBottom = parseFloat(
-            window.getComputedStyle(collider).bottom
-        );
+        const colliderBottom = window.innerHeight - rect.bottom;
         const colliderTop = colliderBottom + colliderHeight;
-        const rect = collider.getBoundingClientRect();
         const colliderLeft = rect.left;
         const colliderRight = colliderLeft + colliderWidth;
 
