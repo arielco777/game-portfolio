@@ -25,7 +25,7 @@ let areaLeft = 0;
 
 let playerLeft = 0;
 let playerBottom = 100;
-let characterSpeed = 5;
+let characterSpeed = 4;
 
 let verticalVelocity = 0;
 const gravity = 0.5;
@@ -192,25 +192,42 @@ function checkCollision() {
 }
 
 function keyDownHandler(event) {
-    if (event.key === "d") {
+    if (event.key === "d" || event.key == "ArrowRight") {
         rightPressed = true;
-    } else if (event.key === "a") {
+    } else if (event.key === "a" || event.key == "ArrowLeft") {
         leftPressed = true;
-    } else if (event.key === " " || event.key === "w") {
+    } else if (
+        event.key === " " ||
+        event.key === "w" ||
+        event.key == "ArrowUp"
+    ) {
         jumpPressed = true;
+    } else if (event.key === "r") {
+        location.reload();
     }
 }
 
 function keyUpHandler(event) {
-    if (event.key === "d") {
+    if (
+        event.key === "d" ||
+        event.keyCode == "39" ||
+        event.key == "ArrowRight"
+    ) {
         rightPressed = false;
-    } else if (event.key === "a") {
+    } else if (
+        event.key === "a" ||
+        event.keyCode == "37" ||
+        event.key == "ArrowLeft"
+    ) {
         leftPressed = false;
-    } else if (event.key === " " || event.key === "w") {
+    } else if (
+        event.key === " " ||
+        event.key === "w" ||
+        event.key == "ArrowUp"
+    ) {
         jumpPressed = false;
     }
 }
-
 function handleResize() {
     viewportWidth = window.innerWidth;
     areaWidth = area.offsetWidth;
@@ -224,4 +241,5 @@ window.addEventListener("load", () => {
 
 window.addEventListener("keydown", keyDownHandler);
 window.addEventListener("keyup", keyUpHandler);
-// window.addEventListener("resize", handleResize);
+// document.onkeydown(arrowHandler);
+window.addEventListener("resize", handleResize);
