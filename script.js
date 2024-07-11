@@ -113,23 +113,27 @@ function applyGravityAndJump() {
     player.style.bottom = `${playerBottom}px`;
 }
 
-//TODO: Make colision by viewport position
 function checkCollision() {
     const playerTop = playerBottom + characterHeight;
     const playerRight = playerLeft + characterWidth;
     collisions.forEach((collider, index) => {
-        const colliderLeft = parseFloat(window.getComputedStyle(collider).left);
-        const colliderWidth = parseFloat(
-            window.getComputedStyle(collider).width
-        );
+        const rect = collider.getBoundingClientRect();
+
         const colliderHeight = parseFloat(
             window.getComputedStyle(collider).height
+        );
+
+        const colliderWidth = parseFloat(
+            window.getComputedStyle(collider).width
         );
         const colliderBottom = parseFloat(
             window.getComputedStyle(collider).bottom
         );
-        const colliderRight = colliderLeft + colliderWidth;
         const colliderTop = colliderBottom + colliderHeight;
+
+        const colliderLeft = rect.left;
+        const colliderRight = colliderLeft + colliderWidth;
+
         // console.log("Rect: ", rect);
         // if (isBox) {
         //     if (
@@ -173,17 +177,17 @@ function checkCollision() {
             playerRight > colliderLeft &&
             playerLeft < colliderRight
         ) {
-            console.log(
-                "ColliderLeft: ",
-                colliderLeft,
-                "PlayerLeft: ",
-                playerLeft
-            );
+            // console.log(
+            //     "ColliderLeft: ",
+            //     colliderLeft,
+            //     "PlayerLeft: ",
+            //     playerLeft
+            // );
             console.log("ColliderTop: ", colliderTop, "Index: ", index);
             isJumping = false;
             isFalling = false;
-            verticalVelocity = 0.9;
-            // playerBottom = colliderTop;
+            verticalVelocity = 0;
+            playerBottom = colliderTop;
         }
         // }
         // else if (
