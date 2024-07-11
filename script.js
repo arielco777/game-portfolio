@@ -192,41 +192,54 @@ function checkCollision() {
 }
 
 function keyDownHandler(event) {
-    if (event.key === "d" || event.key == "ArrowRight") {
-        rightPressed = true;
-    } else if (event.key === "a" || event.key == "ArrowLeft") {
-        leftPressed = true;
-    } else if (
-        event.key === " " ||
-        event.key === "w" ||
-        event.key == "ArrowUp"
-    ) {
-        jumpPressed = true;
-    } else if (event.key === "r") {
-        location.reload();
+    switch (event.key) {
+        case "d":
+        case "ArrowRight":
+            rightPressed = true;
+            break;
+        case "a":
+        case "ArrowLeft":
+            leftPressed = true;
+            break;
+        case " ":
+        case "w":
+        case "ArrowUp":
+            jumpPressed = true;
+            break;
+        case "r":
+            location.reload();
+            break;
     }
 }
 
 function keyUpHandler(event) {
-    if (
-        event.key === "d" ||
-        event.keyCode == "39" ||
-        event.key == "ArrowRight"
-    ) {
-        rightPressed = false;
-    } else if (
-        event.key === "a" ||
-        event.keyCode == "37" ||
-        event.key == "ArrowLeft"
-    ) {
-        leftPressed = false;
-    } else if (
-        event.key === " " ||
-        event.key === "w" ||
-        event.key == "ArrowUp"
-    ) {
-        jumpPressed = false;
+    switch (event.key) {
+        case "d":
+        case "ArrowRight":
+            rightPressed = false;
+            break;
+        case "a":
+        case "ArrowLeft":
+            leftPressed = false;
+            break;
+        case " ":
+        case "w":
+        case "ArrowUp":
+            jumpPressed = false;
+            break;
     }
+
+    // if (event.key === "d" || event.key == "ArrowRight") {
+    //     rightPressed = false;
+    // } else if (event.key === "a" || event.key == "ArrowLeft") {
+    //     leftPressed = false;
+    // } else if (
+    //     event.key === " " ||
+    //     event.key === "w" ||
+    //     event.key == "ArrowUp"
+    // ) {
+    //     jumpPressed = false;
+    // }
 }
 function handleResize() {
     viewportWidth = window.innerWidth;
