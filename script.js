@@ -15,12 +15,12 @@ let areaLeft = 0;
 
 let playerLeft = 0;
 let playerBottom = 0;
-let characterSpeed = 8;
+let characterSpeed = 5;
 
 let verticalVelocity = 0;
 const gravity = 0.5;
 const jumpStrength = 12;
-const groundLevel = 0;
+let groundLevel = 0;
 
 let rightPressed = false;
 let leftPressed = false;
@@ -117,12 +117,11 @@ function checkCollision() {
     const playerTop = playerBottom + characterHeight;
     const playerRight = playerLeft + characterWidth;
     collisions.forEach((collider, index) => {
-        const rect = collider.getBoundingClientRect();
+        const isBox = collider.className.includes("box");
 
         const colliderHeight = parseFloat(
             window.getComputedStyle(collider).height
         );
-
         const colliderWidth = parseFloat(
             window.getComputedStyle(collider).width
         );
@@ -130,75 +129,76 @@ function checkCollision() {
             window.getComputedStyle(collider).bottom
         );
         const colliderTop = colliderBottom + colliderHeight;
-
+        const rect = collider.getBoundingClientRect();
         const colliderLeft = rect.left;
         const colliderRight = colliderLeft + colliderWidth;
 
         // console.log("Rect: ", rect);
-        // if (isBox) {
-        //     if (
-        //         //player under
-        //         player.top > rectBottom &&
-        //         playerRight > rect.left &&
-        //         playerLeft < rect.right
-        //     ) {
-        //         console.log("Hit");
-        //         verticalVelocity = -0.5;
-        //         playerBottom += verticalVelocity;
-        //     }
-        //     if (
-        //         //player left
-        //         playerTop > rectBottom &&
-        //         playerRight > rect.left &&
-        //         playerLeft < rect.left
-        //     ) {
-        //         console.log("Left side");
-        //         playerLeft += characterSpeed;
-        //     }
-        // } else {
-        if (
-            // player on left
-            playerRight > colliderLeft &&
-            playerLeft < colliderLeft &&
-            playerTop < colliderTop
-        ) {
-            playerLeft -= characterSpeed;
-        } else if (
-            //player on right
-            playerLeft < colliderRight &&
-            playerRight > colliderRight &&
-            playerTop < colliderTop
-        )
-            playerLeft += characterSpeed;
-        else if (
-            //player on top
-            playerTop > colliderTop &&
-            playerBottom < colliderTop &&
-            playerRight > colliderLeft &&
-            playerLeft < colliderRight
-        ) {
-            // console.log(
-            //     "ColliderLeft: ",
-            //     colliderLeft,
-            //     "PlayerLeft: ",
-            //     playerLeft
-            // );
-            console.log("ColliderTop: ", colliderTop, "Index: ", index);
-            isJumping = false;
-            isFalling = false;
-            verticalVelocity = 0;
-            playerBottom = colliderTop;
+        if (isBox) {
+            if (
+                playerTop > colliderTop &&
+                playerBottom > colliderTop &&
+                playerLeft < colliderRight &&
+                playerRight > colliderLeft
+            ) {
+                // console.log("here");
+                isJumping = false;
+                isFalling = false;
+                velocity = -1;
+                groundLevel = colliderTop;
+                playerBottom = colliderTop;
+            } else if (
+                playerTop > colliderBottom &&
+                playerLeft < colliderRight &&
+                playerRight > colliderLeft
+            ) {
+                verticalVelocity = 0;
+            } else if (
+                playerTop > colliderBottom &&
+                playerRight > colliderLeft &&
+                playerLeft < colliderLeft
+            ) {
+                playerLeft -= characterSpeed;
+            } else {
+                groundLevel = 0;
+            }
+        } else {
+            if (
+                // player on left
+                playerRight > colliderLeft &&
+                playerLeft < colliderLeft &&
+                playerTop < colliderTop
+            ) {
+                playerLeft -= characterSpeed;
+            } else if (
+                //player on right
+                playerLeft < colliderRight &&
+                playerRight > colliderRight &&
+                playerTop < colliderTop
+            )
+                playerLeft += characterSpeed;
+            else if (
+                //player on top
+                playerBottom < colliderTop &&
+                playerRight > colliderLeft &&
+                playerLeft < colliderRight
+            ) {
+                // console.log("ColliderTop: ", colliderTop, "Index: ", index);
+                isJumping = false;
+                isFalling = false;
+                verticalVelocity = 0;
+                playerBottom = colliderTop;
+            }
+            // }
+            // else if (
+            //     isBox &&
+            //     playerTop > rectBottom &&
+            //     (playerLeft < rect.right || playerRight > rect.left)wd
+            // ) {
+            //     console.log("True");
+            //     verticalVelocity = 0;
+            //     playerBottom += verticalVelocity;
         }
-        // }
-        // else if (
-        //     isBox &&
-        //     playerTop > rectBottom &&
-        //     (playerLeft < rect.right || playerRight > rect.left)wd
-        // ) {
-        //     console.log("True");
-        //     verticalVelocity = 0;
-        //     playerBottom += verticalVelocity;
-        // }
     });
 }
 
