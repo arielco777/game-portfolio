@@ -1,6 +1,6 @@
 const player = document.getElementById("player");
-const characterWidth = 50;
-const characterHeight = 50;
+const characterWidth = 64 - 20;
+const characterHeight = 64;
 
 const area = document.getElementById("game-area");
 let areaWidth = area.offsetWidth;
@@ -25,11 +25,11 @@ let areaLeft = 0;
 
 let playerLeft = 0;
 let playerBottom = 100;
-let characterSpeed = 4;
+let characterSpeed = 5;
 
 let verticalVelocity = 0;
 const gravity = 0.5;
-const jumpStrength = 12;
+const jumpStrength = 11.5;
 let groundLevel = 100;
 
 let rightPressed = false;
@@ -55,9 +55,14 @@ function draw() {
     player.style.bottom = `${playerBottom}px`;
 
     const ctx = player.getContext("2d");
+    base_image = new Image();
+    base_image.src = "assets/Me.png";
+    base_image.onload = function () {
+        ctx.drawImage(base_image, 0, 0, 64, 64);
+    };
 
-    ctx.fillStyle = "rgb(200 0 200)";
-    ctx.fillRect(0, 0, characterWidth, characterHeight);
+    // ctx.fillStyle = "rgb(200 0 200)";
+    // ctx.fillRect(0, 0, characterWidth, characterHeight);
 }
 
 function move() {
@@ -196,10 +201,12 @@ function keyDownHandler(event) {
         case "d":
         case "ArrowRight":
             rightPressed = true;
+            player.style.transform = "rotateY(0)";
             break;
         case "a":
         case "ArrowLeft":
             leftPressed = true;
+            player.style.transform = "rotateY(180deg)";
             break;
         case " ":
         case "w":
