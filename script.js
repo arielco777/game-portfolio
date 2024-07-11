@@ -1,6 +1,6 @@
 const player = document.getElementById("player");
-const characterWidth = 64 - 20;
-const characterHeight = 64;
+let characterWidth = 0;
+let characterHeight = 0;
 
 const area = document.getElementById("game-area");
 let areaWidth = area.offsetWidth;
@@ -29,7 +29,7 @@ let characterSpeed = 5;
 
 let verticalVelocity = 0;
 const gravity = 0.5;
-const jumpStrength = 11.5;
+const jumpStrength = 11;
 let groundLevel = 100;
 
 let rightPressed = false;
@@ -50,6 +50,19 @@ function draw() {
 
     player.style.left = `${playerLeft}px`;
     player.style.bottom = `${playerBottom}px`;
+
+    const img = document.querySelector("img");
+
+    characterHeight = img.naturalHeight;
+    characterWidth = img.naturalWidth - 17;
+
+    // img.onLoad = function () {
+
+    // };
+    // img.src = "./assets/Me.png";
+
+    player.style.width = `${characterWidth}px`;
+    player.style.height = `${characterHeight}px`;
 
     // ctx.fillStyle = "rgb(200 0 200)";
     // ctx.fillRect(0, 0, characterWidth, characterHeight);
