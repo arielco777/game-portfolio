@@ -7,9 +7,19 @@ let areaWidth = area.offsetWidth;
 let viewportWidth = window.innerWidth;
 
 const collisions = document.querySelectorAll(".collision");
+const boxes = document.querySelectorAll(".box-item");
+const boxMessages = document.querySelectorAll(".box-message");
+const boxList = [];
+boxes.forEach((box, index) => {
+    boxList.push({
+        box,
+        pressed: false,
+    });
+});
+console.table(boxMessages);
 // console.log("Collisions: ", collisions);
 // const boxes = document.querySelectorAll(".box");
-// console.log("Boxes: ", boxes);
+console.log("Boxes: ", boxes);
 
 let areaLeft = 0;
 
@@ -85,6 +95,7 @@ function move() {
     applyGravityAndJump();
 
     checkCollision();
+    boxCollision();
 
     requestAnimationFrame(move);
 }
@@ -113,12 +124,33 @@ function applyGravityAndJump() {
     player.style.bottom = `${playerBottom}px`;
 }
 
+function boxCollision() {
+    const playerTop = playerBottom + characterHeight;
+    const playerRight = playerLeft + characterWidth;
+    boxes.forEach((box, index) => {
+        const rect = box.getBoundingClientRect();
+        const boxWidth = parseFloat(window.getComputedStyle(box).width);
+        // const boxBottom = parseFloat(window.getComputedStyle(box).bottom);
+        const boxBottom = window.innerHeight - rect.bottom;
+        const boxLeft = rect.left;
+        const boxRight = boxLeft + boxWidth;
+        if (
+            playerTop > boxBottom &&
+            playerLeft < boxRight &&
+            playerRight > boxLeft
+        ) {
+            verticalVelocity = 0;
+            boxList[index].pressed = true;
+            boxMessages[index].classList.remove("hidden");
+            console.table(boxList);
+        }
+    });
+}
+
 function checkCollision() {
     const playerTop = playerBottom + characterHeight;
     const playerRight = playerLeft + characterWidth;
     collisions.forEach((collider, index) => {
-        const isBox = collider.className.includes("box");
-
         const colliderHeight = parseFloat(
             window.getComputedStyle(collider).height
         );
@@ -133,71 +165,30 @@ function checkCollision() {
         const colliderLeft = rect.left;
         const colliderRight = colliderLeft + colliderWidth;
 
-        // console.log("Rect: ", rect);
-        if (isBox) {
-            if (
-                playerTop > colliderTop &&
-                playerBottom > colliderTop &&
-                playerLeft < colliderRight &&
-                playerRight > colliderLeft
-            ) {
-                // console.log("here");
-                isJumping = false;
-                isFalling = false;
-                velocity = -1;
-                groundLevel = colliderTop;
-                playerBottom = colliderTop;
-            } else if (
-                playerTop > colliderBottom &&
-                playerLeft < colliderRight &&
-                playerRight > colliderLeft
-            ) {
-                verticalVelocity = 0;
-            } else if (
-                playerTop > colliderBottom &&
-                playerRight > colliderLeft &&
-                playerLeft < colliderLeft
-            ) {
-                playerLeft -= characterSpeed;
-            } else {
-                groundLevel = 0;
-            }
-        } else {
-            if (
-                // player on left
-                playerRight > colliderLeft &&
-                playerLeft < colliderLeft &&
-                playerTop < colliderTop
-            ) {
-                playerLeft -= characterSpeed;
-            } else if (
-                //player on right
-                playerLeft < colliderRight &&
-                playerRight > colliderRight &&
-                playerTop < colliderTop
-            )
-                playerLeft += characterSpeed;
-            else if (
-                //player on top
-                playerBottom < colliderTop &&
-                playerRight > colliderLeft &&
-                playerLeft < colliderRight
-            ) {
-                // console.log("ColliderTop: ", colliderTop, "Index: ", index);
-                isJumping = false;
-                isFalling = false;
-                verticalVelocity = 0;
-                playerBottom = colliderTop;
-            }
-            // }
-            // else if (
-            //     isBox &&
-            //     playerTop > rectBottom &&
-            //     (playerLeft < rect.right || playerRight > rect.left)wd
-            // ) {
-            //     console.log("True");
-            //     verticalVelocity = 0;
-            //     playerBottom += verticalVelocity;
+        if (
+            // player on left
+            playerRight > colliderLeft &&
+            playerLeft < colliderLeft &&
+            playerTop < colliderTop
+        ) {
+            playerLeft -= characterSpeed;
+        } else if (
+            //player on right
+            playerLeft < colliderRight &&
+            playerRight > colliderRight &&
+            playerTop < colliderTop
+        )
+            playerLeft += characterSpeed;
+        else if (
+            //player on top
+            playerBottom < colliderTop &&
+            playerRight > colliderLeft &&
+            playerLeft < colliderRight
+        ) {
+            isJumping = false;
+            isFalling = false;
+            verticalVelocity = 0;
+            playerBottom = colliderTop;
         }
     });
 }

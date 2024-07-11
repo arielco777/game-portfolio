@@ -21,13 +21,17 @@ body {
 }
 
 .collision {
-    position: absolute;
     z-index: 10;
     bottom: 0;
     background: red;
     width: 200px;
     height: 100px;
-    box-shadow: 8px 8px 20px;
+}
+
+.world-items {
+    position: absolute;
+    box-shadow: 8px 8px 20px black;
+    z-index: 10;
 }
 
 #tutorial {
@@ -74,18 +78,32 @@ body {
     z-index: 50;
 }
 
-.box {
+.box-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
+    /* left: 400px; */
+    /* bottom: 280px; */
+}
+
+.box-message {
+    font-size: 1.2rem;
+    background-color: rgb(139, 96, 2);
+    box-shadow: 10px 10px 20px black;
+    border: 4px solid brown;
+    padding: 1rem 2rem;
+    z-index: 50;
+}
+
+.box-item {
+    /* position: ; */
+    top: 5rem;
     background-color: gray;
-    bottom: 275px;
-    left: 400px;
     width: 50px;
     height: 50px;
 }
 
-.wall {
-    position: absolute;
-    background-color: green;
-    width: 30px;
-    height: 600px;
+.hidden {
+    visibility: hidden;
 }
