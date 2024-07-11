@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
+        <title>Game Portfolio</title>
+    </head>
+    <body>
+        <div id="game-area">
+            <canvas id="player"></canvas>
+            <div id="tutorial">
+                <div id="post"></div>
+                <p class="pixel-text">
+                    Use A and D to move left and right<br />Space or W to jump
+                    <br />
+                    <span style="font-size: 20px"
+                        >If you get stuck, hold "Shift" and scroll</span
+                    >
+                </p>
+            </div>
+            <div class="collision" style="left: 300px"></div>
+            <div class="collision" style="left: 800px"></div>
+            <!-- <div class="collision" style="left: 1100px; height: 200px"></div> -->
+            <div class="collision" style="left: 1400px"></div>
+            <div class="collision" style="left: 1700px"></div>
+            <!-- <div class="collision box"></div> -->
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
