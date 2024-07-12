@@ -18,10 +18,23 @@ boxes.forEach((box, index) => {
         pressed: false,
     });
 });
-console.table(boxMessages);
+
+const coinUi = document.getElementById("coin-numbers");
+const coins = document.querySelectorAll(".coin");
+let coinsCollected = 0;
+const coinList = [];
+coins.forEach((coin) => {
+    coinList.push({
+        coin,
+        collected: false,
+    });
+});
+
+console.table(coinList);
+
+// console.table(boxMessages);
 // console.log("Collisions: ", collisions);
-// const boxes = document.querySelectorAll(".box");
-console.log("Boxes: ", boxes);
+// console.log("Boxes: ", boxes);
 
 let areaLeft = 0;
 
@@ -96,11 +109,15 @@ function move() {
         }
     }
 
+    const playerTop = playerBottom + characterHeight;
+    const playerRight = playerLeft + characterWidth;
+
     applyGravityAndJump();
 
-    checkCollision();
-    boxCollision();
-    deathCollision();
+    checkCollision(playerRight, playerTop);
+    boxCollision(playerRight, playerTop);
+    collectCoin(playerRight, playerTop);
+    deathCollision(playerRight);
 
     requestAnimationFrame(move);
 }
@@ -129,9 +146,7 @@ function applyGravityAndJump() {
     player.style.bottom = `${playerBottom}px`;
 }
 
-function deathCollision() {
-    const playerTop = playerBottom + characterHeight;
-    const playerRight = playerLeft + characterWidth;
+function deathCollision(playerRight) {
     deathZones.forEach((zone, index) => {
         const rect = zone.getBoundingClientRect();
         const deathTop = window.innerHeight - rect.top;
@@ -145,7 +160,7 @@ function deathCollision() {
             playerLeft > deathLeft
         ) {
             groundLevel = -100;
-            console.log("Dead");
+            // console.log("Dead");
             setTimeout(() => {
                 location.reload();
             }, 500);
@@ -153,9 +168,7 @@ function deathCollision() {
     });
 }
 
-function boxCollision() {
-    const playerTop = playerBottom + characterHeight;
-    const playerRight = playerLeft + characterWidth;
+function boxCollision(playerRight, playerTop) {
     boxes.forEach((box, index) => {
         const rect = box.getBoundingClientRect();
         const boxWidth = parseFloat(window.getComputedStyle(box).width);
@@ -176,10 +189,8 @@ function boxCollision() {
     });
 }
 
-function checkCollision() {
-    const playerTop = playerBottom + characterHeight;
-    const playerRight = playerLeft + characterWidth;
-    collisions.forEach((collider, index) => {
+function checkCollision(playerRight, playerTop) {
+    collisions.forEach((collider) => {
         const rect = collider.getBoundingClientRect();
         const colliderHeight = parseFloat(
             window.getComputedStyle(collider).height
@@ -216,6 +227,30 @@ function checkCollision() {
             isFalling = false;
             verticalVelocity = 0;
             playerBottom = colliderTop;
+        }
+    });
+}
+
+function collectCoin(playerRight, playerTop) {
+    coinList.forEach((coin) => {
+        if (coin.collected) {
+            coin.coin.style.display = "none";
+        }
+        const rect = coin.coin.getBoundingClientRect();
+        const coinLeft = rect.left;
+        const coinRight = rect.right;
+        const coinBottom = window.innerHeight - rect.bottom;
+        const coinTop = window.innerHeight - rect.top;
+        if (
+            ((playerRight > coinLeft && playerLeft < coinLeft) ||
+                (playerLeft < coinRight && playerRight > coinRight)) &&
+            playerBottom < coinTop &&
+            playerTop > coinBottom
+        ) {
+            coin.collected = true;
+            coinsCollected++;
+            coinUi.innerText = coinsCollected;
+            console.table(coinList);
         }
     });
 }

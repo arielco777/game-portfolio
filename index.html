@@ -20,11 +20,7 @@
                 height="auto"
                 width="auto"
             />
-            <div class="pixel-text" id="title">
-                <h1>Super Ariel Bros</h1>
-            </div>
             <div id="sun"></div>
-            <div id="jump" class="pixel-text"><p>Jump Here! &#x2B06;</p></div>
             <div id="player"></div>
             <div id="tutorial">
                 <div id="post"></div>
@@ -35,10 +31,20 @@
                     <span style="font-size: 20px">Press "R" to restart</span>
                 </p>
             </div>
+            <!-- UI -->
+
+            <div class="ui pixel-text">
+                <p>Coins: <span id="coin-numbers">0</span></p>
+            </div>
+
+            <!-- Messages -->
+            <div id="jump" class="pixel-text"><p>Jump Here! &#x2B06;</p></div>
             <div id="fall-message" class="pixel-text">
                 Don't<br />
                 fall!
             </div>
+            <!-- Coins -->
+            <div class="coin"></div>
             <!-- Collisions -->
             <div
                 class="collision world-items"
@@ -57,14 +63,18 @@
             <div class="collision world-items" style="left: 1900px"></div>
             <div
                 class="collision world-items"
-                style="height: 200px; left: 2200px"
+                style="left: 2200px; height: 200px"
             ></div>
             <div
                 class="collision world-items"
-                style="height: 240px; left: 2500px"
+                style="left: 2500px; height: 240px"
             ></div>
-            <!-- TODO: make more collisions -->
+            <div
+                class="collision world-items"
+                style="left: 2750px; height: 150px"
+            ></div>
             <div class="collision world-items" style="left: 3100px"></div>
+            <!-- TODO: make more collisions -->
             <div class="collision world-items" style="left: 1900px"></div>
             <div class="collision world-items" style="left: 1900px"></div>
             <div class="collision world-items" style="left: 1900px"></div>
@@ -73,7 +83,7 @@
             <!-- Boxes -->
             <div
                 class="box-container pixel-text"
-                style="bottom: 286px; left: 120px"
+                style="bottom: 286px; left: 100px"
             >
                 <div class="box-message world-item hidden">
                     Hello! Welcome to my game! <br />
@@ -92,9 +102,11 @@
                 </div>
                 <div class="box-item world-item">?</div>
             </div>
+
+            <!-- Floors -->
             <div class="floor" style="width: 2100px"></div>
             <div class="floor" style="left: 2200px; width: 200px"></div>
-            <div class="floor" style="left: 2500px; width: 600px"></div>
+            <div class="floor" style="left: 2500px; width: 500px"></div>
             <div class="floor" style="left: 3100px; width: 600px"></div>
             <!-- Death Zone -->
             <div class="floor death" style="left: 2100px; width: 100px"></div>
