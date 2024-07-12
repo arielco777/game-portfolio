@@ -6,6 +6,8 @@ const area = document.getElementById("game-area");
 let areaWidth = area.offsetWidth;
 let viewportWidth = window.innerWidth;
 
+const deathZones = document.querySelectorAll(".death");
+
 const collisions = document.querySelectorAll(".collision");
 const boxes = document.querySelectorAll(".box-item");
 const boxMessages = document.querySelectorAll(".box-message");
@@ -30,7 +32,8 @@ let characterSpeed = 5;
 let verticalVelocity = 0;
 const gravity = 0.5;
 const jumpStrength = 11;
-let groundLevel = 100;
+const defaultGroundLevel = 100;
+let groundLevel = defaultGroundLevel;
 
 let rightPressed = false;
 let leftPressed = false;
@@ -41,13 +44,6 @@ let onGround = true;
 let isFalling = true;
 
 function draw() {
-    if (!player.getContext) {
-        const p = document.createElement("p");
-        p.innerText =
-            "Oh no! It seems your browser doesn't support canvas and you can't see all the hard work I did :(. I hope you feel horrible about this!!!";
-        document.querySelector("body").appendChild(p);
-    }
-
     player.style.left = `${playerLeft}px`;
     player.style.bottom = `${playerBottom}px`;
 
@@ -104,6 +100,7 @@ function move() {
 
     checkCollision();
     boxCollision();
+    deathCollision();
 
     requestAnimationFrame(move);
 }
@@ -130,6 +127,30 @@ function applyGravityAndJump() {
     }
 
     player.style.bottom = `${playerBottom}px`;
+}
+
+function deathCollision() {
+    const playerTop = playerBottom + characterHeight;
+    const playerRight = playerLeft + characterWidth;
+    deathZones.forEach((zone, index) => {
+        const rect = zone.getBoundingClientRect();
+        const deathTop = window.innerHeight - rect.top;
+        const deathWidth = parseFloat(window.getComputedStyle(zone).width);
+        const deathLeft = rect.left;
+        const deathRight = deathLeft + deathWidth;
+        // console.log("DeathRight: ", deathRight, "PlayerRight: ", playerRight);
+        if (
+            playerBottom === deathTop &&
+            playerRight < deathRight &&
+            playerLeft > deathLeft
+        ) {
+            groundLevel = -100;
+            console.log("Dead");
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        }
+    });
 }
 
 function boxCollision() {

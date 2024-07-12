@@ -35,6 +35,10 @@
                     <span style="font-size: 20px">Press "R" to restart</span>
                 </p>
             </div>
+            <div id="fall-message" class="pixel-text">
+                Don't<br />
+                fall!
+            </div>
             <!-- Collisions -->
             <div
                 class="collision world-items"
@@ -60,7 +64,7 @@
                 style="height: 240px; left: 2500px"
             ></div>
             <!-- TODO: make more collisions -->
-            <div class="collision world-items" style="left: 1900px"></div>
+            <div class="collision world-items" style="left: 3100px"></div>
             <div class="collision world-items" style="left: 1900px"></div>
             <div class="collision world-items" style="left: 1900px"></div>
             <div class="collision world-items" style="left: 1900px"></div>
@@ -88,7 +92,14 @@
                 </div>
                 <div class="box-item world-item">?</div>
             </div>
-            <div class="floor"></div>
+            <div class="floor" style="width: 2100px"></div>
+            <div class="floor" style="left: 2200px; width: 200px"></div>
+            <div class="floor" style="left: 2500px; width: 600px"></div>
+            <div class="floor" style="left: 3100px; width: 600px"></div>
+            <!-- Death Zone -->
+            <div class="floor death" style="left: 2100px; width: 100px"></div>
+            <div class="floor death" style="left: 2400px; width: 100px"></div>
+            <div class="floor death" style="left: 3000px; width: 100px"></div>
         </div>
 
         <script src="script.js"></script>
