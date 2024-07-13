@@ -14,7 +14,8 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    /* overflow: hidden; */
+    overflow: hidden;
+    /* overflow-y: hidden; */
 }
 
 .ui {
@@ -77,7 +78,8 @@ body {
     bottom: 10px;
     background: red;
     width: 200px;
-    height: 100px;
+    height: 90vh;
+    /* top: 90%; */
 }
 
 .world-items {
