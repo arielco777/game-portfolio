@@ -30,7 +30,7 @@ coins.forEach((coin) => {
     });
 });
 
-console.table(coinList);
+// console.table(coinList);
 
 // console.table(boxMessages);
 // console.log("Collisions: ", collisions);
@@ -160,7 +160,7 @@ function deathCollision(playerRight) {
             playerLeft > deathLeft
         ) {
             groundLevel = -100;
-            // console.log("Dead");
+            console.log("Dead");
             setTimeout(() => {
                 location.reload();
             }, 500);
@@ -184,7 +184,7 @@ function boxCollision(playerRight, playerTop) {
             verticalVelocity = 0;
             boxList[index].pressed = true;
             boxMessages[index].classList.remove("hidden");
-            console.table(boxList);
+            // console.table(boxList);
         }
     });
 }
@@ -250,7 +250,7 @@ function collectCoin(playerRight, playerTop) {
             coin.collected = true;
             coinsCollected++;
             coinUi.innerText = coinsCollected;
-            console.table(coinList);
+            // console.table(coinList);
         }
     });
 }

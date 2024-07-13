@@ -5,7 +5,7 @@
 }
 
 * {
-    min-width: 0;
+    /* min-width: 0; */
     user-select: none;
 }
 
@@ -15,6 +15,7 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+
     /* overflow-y: hidden; */
 }
 
@@ -78,8 +79,7 @@ body {
     bottom: 10px;
     background: red;
     width: 200px;
-    height: 90vh;
-    /* top: 90%; */
+    height: 300px;
 }
 
 .world-items {
