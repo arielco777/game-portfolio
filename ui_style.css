@@ -1,0 +1,25 @@
+.ui {
+    position: fixed;
+    color: white;
+    left: 20px;
+    top: 0px;
+    font-size: 20px;
+}
+
+#jump {
+    position: absolute;
+    bottom: 50px;
+    font-size: 20px;
+    left: 150px;
+    color: white;
+}
+
+#fall-message {
+    position: absolute;
+    bottom: 50px;
+    font-size: 21px;
+    color: white;
+    left: 2100px;
+    width: 100px;
+    text-align: center;
+}

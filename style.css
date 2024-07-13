@@ -19,14 +19,6 @@ body {
     /* overflow-y: hidden; */
 }
 
-.ui {
-    position: fixed;
-    color: white;
-    left: 20px;
-    top: 0px;
-    font-size: 20px;
-}
-
 .coin {
     position: absolute;
     bottom: 20px;
@@ -45,24 +37,6 @@ body {
     background-color: yellow;
     border-radius: 0 0 0 999px;
     z-index: 50;
-}
-
-#jump {
-    position: absolute;
-    bottom: 50px;
-    font-size: 20px;
-    left: 150px;
-    color: white;
-}
-
-#fall-message {
-    position: absolute;
-    bottom: 50px;
-    font-size: 21px;
-    color: white;
-    left: 2100px;
-    width: 100px;
-    text-align: center;
 }
 
 .pixel-text {
